@@ -10,9 +10,6 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.x
-      - run: dotnet restore KlassenAdministratieDevOps.csproj
-        name: Action - Dotnet Restore
-        working-directory: KlassenAdministratieDevOps
       - run: dotnet build KlassenAdministratieDevOps.csproj -c Release
         name: Action - Dotnet Build
         working-directory: KlassenAdministratieDevOps
