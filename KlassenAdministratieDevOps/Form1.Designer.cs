@@ -34,6 +34,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.ClassList = new System.Windows.Forms.ListBox();
             this.txt_class_name = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_teacher_name = new System.Windows.Forms.TextBox();
+            this.txt_teacher_age = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_add_class
@@ -48,7 +52,7 @@
             // 
             // txt_field_of_study
             // 
-            this.txt_field_of_study.Location = new System.Drawing.Point(404, 196);
+            this.txt_field_of_study.Location = new System.Drawing.Point(184, 203);
             this.txt_field_of_study.Name = "txt_field_of_study";
             this.txt_field_of_study.Size = new System.Drawing.Size(125, 27);
             this.txt_field_of_study.TabIndex = 2;
@@ -56,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(120, 138);
+            this.label1.Location = new System.Drawing.Point(34, 145);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 20);
             this.label1.TabIndex = 3;
@@ -65,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(404, 138);
+            this.label2.Location = new System.Drawing.Point(184, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(155, 20);
             this.label2.TabIndex = 4;
@@ -83,16 +87,52 @@
             // 
             // txt_class_name
             // 
-            this.txt_class_name.Location = new System.Drawing.Point(120, 196);
+            this.txt_class_name.Location = new System.Drawing.Point(34, 203);
             this.txt_class_name.Name = "txt_class_name";
             this.txt_class_name.Size = new System.Drawing.Size(125, 27);
             this.txt_class_name.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(408, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(157, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Choose Teacher Name";
+            // 
+            // txt_teacher_name
+            // 
+            this.txt_teacher_name.Location = new System.Drawing.Point(408, 89);
+            this.txt_teacher_name.Name = "txt_teacher_name";
+            this.txt_teacher_name.Size = new System.Drawing.Size(125, 27);
+            this.txt_teacher_name.TabIndex = 8;
+            // 
+            // txt_teacher_age
+            // 
+            this.txt_teacher_age.Location = new System.Drawing.Point(408, 203);
+            this.txt_teacher_age.Name = "txt_teacher_age";
+            this.txt_teacher_age.Size = new System.Drawing.Size(125, 27);
+            this.txt_teacher_age.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(408, 145);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(144, 20);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Choose Teacher Age";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txt_teacher_age);
+            this.Controls.Add(this.txt_teacher_name);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txt_class_name);
             this.Controls.Add(this.ClassList);
             this.Controls.Add(this.label2);
@@ -115,5 +155,9 @@
         private Label label2;
         private ListBox ClassList;
         private TextBox txt_class_name;
+        private Label label3;
+        private TextBox txt_teacher_name;
+        private TextBox txt_teacher_age;
+        private Label label4;
     }
 }

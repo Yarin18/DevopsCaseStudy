@@ -16,11 +16,12 @@ namespace KlassenAdministratieDevOps
         public String ClassName { get; set; }
         public String FieldOfStudy { get; set; }
 
-
-        public Class(String className, String fieldOfStudy)
+        public String TeacherName { get; set; }
+        public Class(String className, String fieldOfStudy, String teacherName)
         {
             this.ClassName = className;
             this.FieldOfStudy = fieldOfStudy;
+            this.TeacherName = teacherName;
         }
     }
 }

@@ -22,8 +22,9 @@ namespace KlassenAdministratieDevOps
         {
             using IDbConnection db = GetDBConnection();
             db.Execute("CREATE TABLE IF NOT EXISTS students (name VARCHAR(64), age INT, className VARCHAR(64))");
-            db.Execute("CREATE TABLE IF NOT EXISTS classes (className VARCHAR(64), fieldOfStudy VARCHAR(64))");
+            db.Execute("CREATE TABLE IF NOT EXISTS classes (className VARCHAR(64), fieldOfStudy VARCHAR(64), teacherName VARCHAR(64))");
             db.Execute("CREATE TABLE IF NOT EXISTS grades (studentName VARCHAR(64), subject VARCHAR(32), grade FLOAT)");
+            db.Equals("CREATE TABLE IF NOT EXISTS teachers (teacherName VARCHAR(64), teacherAge INT, className VARCHAR(64))");
         }
 
 
@@ -44,7 +45,7 @@ namespace KlassenAdministratieDevOps
         public void SetGrade(Student student, Double grade, Subject subject)
         {
             using IDbConnection db = GetDBConnection();
-            
+
             bool exists = db.ExecuteScalar<bool>("SELECT COUNT(1) FROM grades WHERE subject=@subject & studentName = @studentName", new { subject = subject.ToString(), studentName = student.Name });
             // if the grade already exists, we simply update the value
             if (exists)
@@ -109,14 +110,48 @@ namespace KlassenAdministratieDevOps
         }
 
         /**
+         * Adds a new teacher <param name="teacher"></param>  to the database
+         */
+        public void AddTeacher(Teacher teacher)
+        {
+            if (DoesTeacherExist(teacher.Name))
+            {
+                using IDbConnection db = GetDBConnection();
+                db.Execute(
+                    "INSERT INTO teachers (teacherName, teacherAge, class) VALUES (@name, @age, @className)",
+                    new { name = teacher.Name, age = teacher.Age, className = teacher.ClassName }
+                    );
+            }
+        }
+
+        /**
+         * Checks whether a teacher already has a class/exists
+         */
+        private Boolean DoesTeacherExist(String teacherName)
+        {
+            using IDbConnection db = GetDBConnection();
+            return db.ExecuteScalar<bool>("SELECT COUNT(1) FROM teachers WHERE teacherName=@name", new { name = teacherName });
+
+        }
+        /**
+         * Gets the teacher that belongs to <param name="c"></param>
+         * Will return null if no such teacher exists.
+         */
+        public Teacher GetTeacherFromClass(Class c)
+        {
+            using IDbConnection db = GetDBConnection();
+            return db.Query<Teacher>("SELET * FROM teachers WHERE className = @className", new { className = c.ClassName }).First();
+        }
+
+        /**
          * Add a class <param name="c"></param> to the database.
          */
         public void AddClass(Class c)
         {
             using IDbConnection db = GetDBConnection();
             db.Execute(
-                "INSERT INTO classes (className, fieldOfStudy) VALUES (@className, @fieldOfStudy)",
-                new { className = c.ClassName, fieldOfStudy = c.FieldOfStudy }
+                "INSERT INTO classes (className, fieldOfStudy, teacherName) VALUES (@className, @fieldOfStudy, @teacherName)",
+                new { className = c.ClassName, fieldOfStudy = c.FieldOfStudy, teacherName = c.TeacherName}
                 );
         }
 
@@ -194,7 +229,6 @@ namespace KlassenAdministratieDevOps
         {
             using IDbConnection db = GetDBConnection();
             return db.ExecuteScalar<bool>("SELECT COUNT(1) FROM students WHERE className=@className", new { className = c.ClassName });
-
         }
         /**
          * Returns a list of all classes.

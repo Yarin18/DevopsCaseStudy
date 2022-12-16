@@ -37,6 +37,8 @@
             this.btn_back = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbl_teacher = new System.Windows.Forms.Label();
+            this.lbl_field_of_study = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // StudentList
@@ -86,7 +88,7 @@
             // lbl_viewing_class
             // 
             this.lbl_viewing_class.AutoSize = true;
-            this.lbl_viewing_class.Location = new System.Drawing.Point(63, 45);
+            this.lbl_viewing_class.Location = new System.Drawing.Point(12, 9);
             this.lbl_viewing_class.Name = "lbl_viewing_class";
             this.lbl_viewing_class.Size = new System.Drawing.Size(106, 20);
             this.lbl_viewing_class.TabIndex = 5;
@@ -120,11 +122,31 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Student Age";
             // 
+            // lbl_teacher
+            // 
+            this.lbl_teacher.AutoSize = true;
+            this.lbl_teacher.Location = new System.Drawing.Point(12, 84);
+            this.lbl_teacher.Name = "lbl_teacher";
+            this.lbl_teacher.Size = new System.Drawing.Size(67, 20);
+            this.lbl_teacher.TabIndex = 9;
+            this.lbl_teacher.Text = "Teacher: ";
+            // 
+            // lbl_field_of_study
+            // 
+            this.lbl_field_of_study.AutoSize = true;
+            this.lbl_field_of_study.Location = new System.Drawing.Point(12, 46);
+            this.lbl_field_of_study.Name = "lbl_field_of_study";
+            this.lbl_field_of_study.Size = new System.Drawing.Size(105, 20);
+            this.lbl_field_of_study.TabIndex = 10;
+            this.lbl_field_of_study.Text = "Field Of Study:";
+            // 
             // ClassInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_field_of_study);
+            this.Controls.Add(this.lbl_teacher);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_back);
@@ -153,5 +175,7 @@
         private Button btn_back;
         private Label label1;
         private Label label2;
+        private Label lbl_teacher;
+        private Label lbl_field_of_study;
     }
 }

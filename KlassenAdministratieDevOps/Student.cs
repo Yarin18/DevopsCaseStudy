@@ -15,7 +15,7 @@ namespace KlassenAdministratieDevOps
     public class Student : Human
     {
         public String ClassName;
-        public Dictionary<Subject, Double> Grades { get; set; } = new Dictionary<Subject, double>(); 
+        public Dictionary<Subject, Double> Grades { get; set; } = new Dictionary<Subject, double>();
 
         public Student(String name, Int64 age, string className) : base(name, age)
         {

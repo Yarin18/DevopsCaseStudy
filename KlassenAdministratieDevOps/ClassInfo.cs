@@ -87,6 +87,8 @@ namespace KlassenAdministratieDevOps
                 StudentList.Items.Add(Student.Name);
             }
             lbl_viewing_class.Text += ViewingClass.ClassName;
+            lbl_teacher.Text += ViewingClass.TeacherName;
+            lbl_field_of_study.Text += " " + ViewingClass.FieldOfStudy;
         }
 
         private void StudentList_SelectedIndexChanged(object sender, EventArgs e)

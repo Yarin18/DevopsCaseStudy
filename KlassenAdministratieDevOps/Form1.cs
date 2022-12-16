@@ -26,8 +26,6 @@ namespace KlassenAdministratieDevOps
             {
                 ClassList.Items.Add(c.ClassName);
             }
-
-            //TODO load in classes into ClassList listbox
         }
 
         private void btn_add_class_Click(object sender, EventArgs e)
@@ -35,7 +33,16 @@ namespace KlassenAdministratieDevOps
             String className = txt_class_name.Text;
             String fieldOfStudy = txt_field_of_study.Text;
 
-            if (className == "" || fieldOfStudy == "")
+            String teacherName = txt_teacher_name.Text;
+            int teacherAge;
+
+            if (!int.TryParse(txt_teacher_age.Text, out teacherAge))
+            {
+                MessageBox.Show("Please provide a valid age for the teacher!");
+                return;
+            }
+
+            if (className == "" || fieldOfStudy == "" || teacherName == "" || txt_teacher_age.Text == "")
             {
                 MessageBox.Show("Please fill in all the boxes!");
                 return;
@@ -51,9 +58,12 @@ namespace KlassenAdministratieDevOps
                 {
                     txt_field_of_study.Text = "";
                     txt_class_name.Text = "";
+                    txt_teacher_age.Text = "";
+                    txt_teacher_name.Text = "";
 
                     // Add the class to the listbox
-                    DatabaseContext.AddClass(new Class(className, fieldOfStudy));  
+                    Class newClass = new Class(className, fieldOfStudy, teacherName);
+                    DatabaseContext.AddClass(newClass);  
                     ClassList.Items.Add(className);
                 }
             }
