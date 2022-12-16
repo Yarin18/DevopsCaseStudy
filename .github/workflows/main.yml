@@ -1,24 +1,30 @@
-name: Build and Deploy
+name: "Publish And Deploy Actions"
 
-on: [push]
+on:
+  push:
+    tags:
+      - "class-commands/v*"
 
 jobs:
-  build:
+  deploy:
     runs-on: windows-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: DevOps WorkFlow
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 3.1.401
-    - name: Build DotNet Devops Application
-      run: dotnet build --configuration Release
-    - name: Publish DotNet Devops application
-      run: dotnet publish --configuration Release --output bin/Release/publish
-      env:
-        PublishFolder: bin/Release/publish
-    - name: Create an executable .exe file
-      run: |
-        cd "$PublishFolder"
-        dotnet publish -r win-x64 --self-contained false --output "$PublishFolder/win-x64"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      - run: dotnet restore KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj
+      - run: dotnet build KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj -c Release --no-restore
+      - run: dotnet publish KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      - uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name:  ${{ github.ref }}
+      - uses: csexton/release-asset-actions@v2
+        with:
+          github-token:  ${{ secrets.GITHUB_TOKEN }}
+          pattern: KlassenAdministratieDevOps/bin/Release/net6.0-windows/win-x64/publish/*.exe
+          release-url: ${{ steps.create_release.outputs.upload_url }}
+      
