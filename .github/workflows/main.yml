@@ -9,14 +9,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.x
-#       - run: dotnet restore KlassenAdministratieDevOps.csproj
-#         name: Action - Dotnet Restore
-#         working-directory: KlassenAdministratieDevOps
-      - run: dotnet build KlassenAdministratieDevOps.csproj -c Release --no-restore
+          dotnet-version: 6.0.x
+      - run: dotnet restore KlassenAdministratieDevOps.csproj
+        name: Action - Dotnet Restore
+        working-directory: KlassenAdministratieDevOps
+      - run: dotnet build KlassenAdministratieDevOps.csproj -c Release
         name: Action - Dotnet Build
         working-directory: KlassenAdministratieDevOps
-      - run: dotnet publish KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      - run: dotnet publish KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
         name: Action - Dotnet Publish
         working-directory: KlassenAdministratieDevOps
       - uses: actions/create-release@v1
