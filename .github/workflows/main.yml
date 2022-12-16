@@ -1,9 +1,6 @@
 name: "Publish And Deploy Actions"
 
-on:
-  push:
-    tags:
-      - "klassen-administration/v*"
+on: [push]
 
 jobs:
   deploy:
