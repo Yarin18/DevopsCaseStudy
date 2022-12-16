@@ -79,9 +79,9 @@ namespace KlassenAdministratieDevOps
                 txt_grade.Text = "";
 
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show("Please provide a valid input for the grades and subjects" + ex);
+                MessageBox.Show("Please provide a valid input for the grades and subjects");
             }
         }
         /**
