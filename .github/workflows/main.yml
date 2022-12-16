@@ -11,8 +11,14 @@ jobs:
         with:
           dotnet-version: 3.1.x
       - run: dotnet restore KlassenAdministratieDevOps.csproj
+        name: Action - Dotnet Restore
+        working-directory: KlassenAdministratieDevOps
       - run: dotnet build KlassenAdministratieDevOps.csproj -c Release --no-restore
+        name: Action - Dotnet Build
+        working-directory: KlassenAdministratieDevOps
       - run: dotnet publish KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+        name: Action - Dotnet Publish
+        working-directory: KlassenAdministratieDevOps
       - uses: actions/create-release@v1
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
