@@ -44,7 +44,7 @@ namespace KlassenAdministratieDevOps
         public void SetGrade(Student student, Double grade, Subject subject)
         {
             using IDbConnection db = GetDBConnection();
-
+            
             bool exists = db.ExecuteScalar<bool>("SELECT COUNT(1) FROM grades WHERE subject=@subject & studentName = @studentName", new { subject = subject.ToString(), studentName = student.Name });
             // if the grade already exists, we simply update the value
             if (exists)
