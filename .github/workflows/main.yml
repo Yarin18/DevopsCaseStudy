@@ -13,10 +13,10 @@ jobs:
       - run: dotnet restore KlassenAdministratieDevOps.csproj
         name: Action - Dotnet Restore
         working-directory: KlassenAdministratieDevOps
-      - run: dotnet build KlassenAdministratieDevOps.csproj -c Release
+      - run: dotnet build KlassenAdministratieDevOps.csproj -c Release --no-restore
         name: Action - Dotnet Build
         working-directory: KlassenAdministratieDevOps
-      - run: dotnet publish -r win-x64 -c Release --self-contained true -p:PublishSingleFile=true
+      - run: dotnet publish -r win-x64 -c Release --self-contained true -r win-x64 -p:PublishSingleFile=true --no-build
         name: Action - Dotnet Publish
         working-directory: KlassenAdministratieDevOps
       - uses: actions/create-release@v1
