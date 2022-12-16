@@ -13,7 +13,7 @@ jobs:
       - run: dotnet build KlassenAdministratieDevOps.csproj -c Release
         name: Action - Dotnet Build
         working-directory: KlassenAdministratieDevOps
-      - run: dotnet publish KlassenAdministratieDevOps/KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      - run: dotnet publish KlassenAdministratieDevOps.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
         name: Action - Dotnet Publish
         working-directory: KlassenAdministratieDevOps
       - uses: actions/create-release@v1
