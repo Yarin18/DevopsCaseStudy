@@ -16,6 +16,14 @@ namespace KlassenAdministratieDevOps
     {
 
         /**
+         * Creates a new connection to the SQLite database. 
+         * */
+        public IDbConnection GetDBConnection()
+        {
+            return new SqliteConnection(@"Data Source=C:\Users\yarin\source\repos\KlassenAdministratieDevOps\KlassenAdministratieDevOps\db\devops.db");
+        }
+
+        /**
          * Create the tables, students, classes and grades
          */
         public void CreateTable()
@@ -246,12 +254,6 @@ namespace KlassenAdministratieDevOps
         {
             using IDbConnection db = GetDBConnection();
             return db.ExecuteScalar<bool>("SELECT COUNT(1) FROM classes WHERE className=@className", new { className = className });
-        }
-
-
-        public IDbConnection GetDBConnection()
-        {
-            return new SqliteConnection(@"Data Source=C:\Users\yarin\source\repos\KlassenAdministratieDevOps\KlassenAdministratieDevOps\db\devops.db");
         }
     }
 }
