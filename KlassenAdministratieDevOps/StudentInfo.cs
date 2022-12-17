@@ -61,7 +61,7 @@ namespace KlassenAdministratieDevOps
 
             lbl_class.Text += " " + ViewingClass.ClassName;
             lbl_viewing_student.Text += " " + ViewingStudent.Name;
-            //lbl_overall_avg_grade.Text += " " + ViewingStudent.Grades.Values.Average();
+            lbl_overall_avg_grade.Text += " " + ViewingStudent.Grades.Values.Average();
 
         }
 
