@@ -32,7 +32,7 @@ namespace KlassenAdministratieDevOps
             db.Execute("CREATE TABLE IF NOT EXISTS students (name VARCHAR(64), age INT, className VARCHAR(64))");
             db.Execute("CREATE TABLE IF NOT EXISTS classes (className VARCHAR(64), fieldOfStudy VARCHAR(64), teacherName VARCHAR(64))");
             db.Execute("CREATE TABLE IF NOT EXISTS grades (studentName VARCHAR(64), subject VARCHAR(32), grade FLOAT)");
-            db.Equals("CREATE TABLE IF NOT EXISTS teachers (teacherName VARCHAR(64), teacherAge INT, className VARCHAR(64))");
+            db.Execute("CREATE TABLE IF NOT EXISTS teachers (teacherName VARCHAR(64), teacherAge INT, className VARCHAR(64))");
         }
 
 
@@ -92,14 +92,14 @@ namespace KlassenAdministratieDevOps
                 // Else it will get lost
                 foreach (var item in res)
                 {
-                    grades.Add(Enum.Parse<Subject>(item.subject), item.grade);
+                    grades.TryAdd(Enum.Parse<Subject>(item.subject), item.grade);
                 }
 
                 List<Subject> notExisting = Enum.GetValues(typeof(Subject)).Cast<Subject>().ToList().Except(grades.Keys).ToList();
                 // Put all the grades that are not yet updated into the database with the defautl value
                 notExisting.ForEach(notExisting =>
                 {
-                    grades.Add(notExisting, 0);
+                    grades.TryAdd(notExisting, 0);
                 });
 
                 // Sort it so it's consistent
@@ -111,7 +111,7 @@ namespace KlassenAdministratieDevOps
                 // Give everyone 0 for their grades since its a new student.
                 foreach (Subject s in Enum.GetValues(typeof(Subject)))
                 {
-                    grades.Add(s, 0);
+                    grades.TryAdd(s, 0);
                 }
                 return grades;
             }
@@ -122,11 +122,11 @@ namespace KlassenAdministratieDevOps
          */
         public void AddTeacher(Teacher teacher)
         {
-            if (DoesTeacherExist(teacher.Name))
+            if (!DoesTeacherExist(teacher.Name))
             {
                 using IDbConnection db = GetDBConnection();
                 db.Execute(
-                    "INSERT INTO teachers (teacherName, teacherAge, class) VALUES (@name, @age, @className)",
+                    "INSERT INTO teachers (teacherName, teacherAge, className) VALUES (@name, @age, @className)",
                     new { name = teacher.Name, age = teacher.Age, className = teacher.ClassName }
                     );
             }

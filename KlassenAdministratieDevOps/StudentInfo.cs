@@ -73,11 +73,12 @@ namespace KlassenAdministratieDevOps
                 Double grade = Double.Parse(txt_grade.Text);
                 Subject subject = Enum.Parse<Subject>(txt_subject.Text.ToUpper());
                 db.SetGrade(ViewingStudent, grade, subject);
+                ViewingStudent.Grades = db.GetGrades(ViewingStudent);
                 UpdateGradeList(txt_subject.Text, grade);
 
                 txt_subject.Text = "";
                 txt_grade.Text = "";
-
+                lbl_overall_avg_grade.Text = "Overall Average Grade: " + ViewingStudent.Grades.Values.Average();
             }
             catch
             {

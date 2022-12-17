@@ -62,7 +62,9 @@ namespace KlassenAdministratieDevOps
                     txt_teacher_name.Text = "";
 
                     // Add the class to the listbox
-                    Class newClass = new Class(className, fieldOfStudy, teacherName);
+                    Teacher teacher = new Teacher(teacherName, teacherAge, className);
+                    Class newClass = new Class(className, fieldOfStudy, teacher.Name);
+                    DatabaseContext.AddTeacher(teacher);
                     DatabaseContext.AddClass(newClass);  
                     ClassList.Items.Add(className);
                 }
