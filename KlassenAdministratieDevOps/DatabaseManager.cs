@@ -15,12 +15,12 @@ namespace KlassenAdministratieDevOps
     public class DatabaseManager
     {
 
-        /**
+        /** 
          * Creates a new connection to the SQLite database. 
          * */
         public IDbConnection GetDBConnection()
         {
-            return new SqliteConnection(@"Data Source=C:\Users\yarin\source\repos\KlassenAdministratieDevOps\KlassenAdministratieDevOps\db\devops.db");
+            return new SqliteConnection(@"Data Source=.\devops.db");
         }
 
         /**

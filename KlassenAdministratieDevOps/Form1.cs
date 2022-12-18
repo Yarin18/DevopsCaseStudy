@@ -21,11 +21,14 @@ namespace KlassenAdministratieDevOps
         private void Form1_Load(object sender, EventArgs e)
         {
             DatabaseContext.CreateTable();
-
-            foreach (Class c in DatabaseContext.GetAllClasses())
+            try
             {
-                ClassList.Items.Add(c.ClassName);
+                foreach (Class c in DatabaseContext.GetAllClasses())
+                {
+                    ClassList.Items.Add(c.ClassName);
+                }
             }
+            catch { }
         }
 
         private void btn_add_class_Click(object sender, EventArgs e)
