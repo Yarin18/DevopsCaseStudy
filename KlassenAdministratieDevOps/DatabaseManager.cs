@@ -20,7 +20,7 @@ namespace KlassenAdministratieDevOps
          * */
         public IDbConnection GetDBConnection()
         {
-            return new SqliteConnection(@"Data Source=.\devops.db");
+            return new SqliteConnection(@"Data Source=.\devops.db;");
         }
 
         /**
